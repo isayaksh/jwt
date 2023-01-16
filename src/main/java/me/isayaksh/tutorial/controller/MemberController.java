@@ -5,12 +5,7 @@ import lombok.extern.slf4j.Slf4j;
 import me.isayaksh.tutorial.domain.Member;
 import me.isayaksh.tutorial.jwt.TokenInfo;
 import me.isayaksh.tutorial.service.MemberService;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.*;
-
-import javax.servlet.http.Cookie;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import java.util.List;
 
 @Slf4j
@@ -23,9 +18,8 @@ public class MemberController {
 
     @PostMapping("/join")
     public String join(@RequestBody MemberLoginRequestDto memberLoginRequestDto){
-
         memberService.join(memberLoginRequestDto.getUsername(), memberLoginRequestDto.getPassword());
-        return "ok";
+        return "join success";
     }
 
     @PostMapping("/login")
