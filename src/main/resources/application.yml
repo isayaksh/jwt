@@ -1,8 +1,4 @@
 spring:
-
-#  init:
-#    mode: always
-
   h2:
     console:
       enabled: true
@@ -23,11 +19,13 @@ spring:
         show_sql: true
     # defer-datasource-initialization: true
 
+
 jwt:
   header: Authorization
   secret: VlwEyVBsYt9V7zq57TejMnVUyzblYcfPQye08f7MGVA9XkHa # 시크릿 키
-  token-validity-in-seconds: 1800
+  access-token-validity-in-seconds: 1800
+  refresh-token-validity-in-seconds: 3600
 
-logging:
-  level:
-    me.isayaksh: DEBUG
+#logging:
+#  level:
+#    me.isayaksh: DEBUG

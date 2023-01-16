@@ -14,6 +14,9 @@ import java.util.Collection;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import static javax.persistence.FetchType.LAZY;
+import static javax.persistence.GenerationType.IDENTITY;
+
 @Getter
 @Builder
 @NoArgsConstructor
@@ -21,9 +24,12 @@ import java.util.stream.Collectors;
 @Entity
 public class Member implements UserDetails {
 
-    @Id
-    @Column(updatable = false, unique = true, nullable = false)
-    private String memberId;
+    @Id @GeneratedValue(strategy = IDENTITY)
+    @Column(name = "member_id",updatable = false, unique = true, nullable = false)
+    private Long memberId;
+
+    @Column(nullable = false)
+    private String username;
 
     @Column(nullable = false)
     private String password;
@@ -31,6 +37,11 @@ public class Member implements UserDetails {
     @ElementCollection(fetch = FetchType.EAGER)
     @Builder.Default
     private List<String> roles = new ArrayList<>();
+
+    public Member(String username, String password) {
+        this.username = username;
+        this.password = password;
+    }
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
@@ -41,7 +52,7 @@ public class Member implements UserDetails {
 
     @Override
     public String getUsername() {
-        return memberId;
+        return username;
     }
 
     @Override
